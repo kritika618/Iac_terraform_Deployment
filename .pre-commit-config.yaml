@@ -1,0 +1,6 @@
+repos:
+-   repo: https://github.com/kritika618/terraform-precommit.git
+    rev:  v2.0.0
+    hooks:
+    - id: terraform-fmt
+    - id: sops-encrypt
