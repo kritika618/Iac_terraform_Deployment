@@ -4,16 +4,16 @@ variable "region" {
 }
 
 variable "cluster_name" {
-  description = "EKS cluster name"
+  description = "Name of the EKS cluster"
   type        = string
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
+  description = "VPC ID where EKS will be deployed"
   type        = string
 }
 
 variable "private_subnets" {
-  description = "Private subnets"
+  description = "List of private subnet IDs for EKS nodes"
   type        = list(string)
 }

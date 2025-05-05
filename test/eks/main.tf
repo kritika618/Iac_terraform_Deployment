@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "ap-south-1"  # Directly hardcoded if desired
+  region = "ap-south-1"
 }
 
 module "eks" {
