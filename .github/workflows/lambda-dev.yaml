@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'infrastructure/lambda/'
+      - 'infrastructure/lambda/**'
       
 jobs:
   terraform:      
