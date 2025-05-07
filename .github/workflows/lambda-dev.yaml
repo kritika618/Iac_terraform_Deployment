@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'infrastructure/lambda/'
-
+      
 jobs:
   terraform:      
     name: 'Terraform Init, Format, Validate, Plan, Apply'    
