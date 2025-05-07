@@ -1,32 +1,57 @@
-provider "aws" {
-  region = "us-east-1"
-}
+name: Terraform lambda-dev
 
-resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda-exec-role"
+on:
+  push:  
+    branches:
+      - main
+    paths:
+      - 'infrastructure/lambda/'
 
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Action = "sts:AssumeRole",
-      Principal = {
-        Service = "lambda.amazonaws.com"
-      },
-      Effect = "Allow",
-      Sid    = ""
-    }]
-  })
-}
+jobs:
+  terraform:      
+    name: 'Terraform Init, Format, Validate, Plan, Apply'    
+    runs-on: ubuntu-latest 
 
-resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
-  role       = "arn:aws:iam::273354669111:role/Tf_Lambda_function"
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-}
+    env:
+      AWS_REGION: 'ap-south-1'    
+      TF_VERSION: '1.4.0'
 
-resource "aws_lambda_function" "docker_lambda" {
-  function_name = "hello-docker-lambda"
-  package_type  = "Image"
-  image_uri     = "273354669111.dkr.ecr.ap-south-1.amazonaws.com/lambda-github:v1.0.0"
-  role          = "arn:aws:iam::273354669111:role/Tf_Lambda_function"
-  timeout       = 10
-}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init
+        run: |
+          export TF_LOG=DEBUG
+          terraform -chdir=infrastructure/lambda init 
+
+      - name: Terraform fmt
+        run: terraform fmt
+        working-directory: infrastructure/lambda 
+
+      - name: Terraform plan
+        run: terraform plan -out=tfplan 
+        working-directory: infrastructure/lambda
+
+      - name: Show Terraform Plan with Debugging
+        run: |
+          export TF_LOG=DEBUG
+          terraform show tfplan
+        working-directory: infrastructure/lambda
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform -chdir=infrastructure/lambda apply -auto-approve 
