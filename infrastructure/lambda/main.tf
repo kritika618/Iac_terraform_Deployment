@@ -1,0 +1,32 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_iam_role" "lambda_exec_role" {
+  name = "lambda-exec-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Action = "sts:AssumeRole",
+      Principal = {
+        Service = "lambda.amazonaws.com"
+      },
+      Effect = "Allow",
+      Sid    = ""
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
+  role       = aws_iam_role.lambda_exec_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_lambda_function" "docker_lambda" {
+  function_name = "hello-docker-lambda"
+  package_type  = "Image"
+  image_uri     = "273354669111.dkr.ecr.ap-south-1.amazonaws.com/lambda-github:v1.0.0"
+  role          = aws_iam_role.lambda_exec_role.arn
+  timeout       = 10
+}
