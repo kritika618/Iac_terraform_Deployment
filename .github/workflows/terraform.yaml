@@ -34,7 +34,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.5.0
-
+ 
       - name: Terraform Init
         run: terraform init
         working-directory: ./test/eks
