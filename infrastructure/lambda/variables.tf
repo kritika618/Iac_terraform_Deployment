@@ -1,9 +1,9 @@
-variable "hello-lambda" {
-  description = "Name of the Lambda function"
+variable "function_name" {
+  description = "Lambda function name"
   type        = string
 }
 
 variable "image_uri" {
-  description = "ECR image URI for the Lambda"
+  description = "ECR Image URI for Lambda function"
   type        = string
 }
