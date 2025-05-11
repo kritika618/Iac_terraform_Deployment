@@ -13,11 +13,6 @@ jobs:
 
     env:
       AWS_REGION: ap-south-1
-      TF_CLI_ARGS: "-no-color -quiet"
-
-    defaults:
-      run:
-        shell: bash
 
     steps:
       - name: Checkout repository
@@ -26,15 +21,28 @@ jobs:
       - name: Set up Terraform (required for Terragrunt)
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.11.3'
+          terraform_version: '1.6.6'
+
+      - name: Debug:Print environment and $PATH
+        run: |
+          echo "Environment:"
+          printenv
+          echo "PATH:"
+          echo $PATH
 
       - name: Install Terragrunt
         run: |
-          TG_VERSION="v0.56.0"  # Specify the version you want
+          TG_VERSION="v0.56.0"
           wget https://github.com/gruntwork-io/terragrunt/releases/download/${TG_VERSION}/terragrunt_linux_amd64
           chmod +x terragrunt_linux_amd64
           sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
           terragrunt --version
+
+      - name: Install Tofu (if required)
+        run: |
+          wget https://github.com/tofu/tofu/releases/download/v0.1/tofu-linux-amd64
+          chmod +x tofu-linux-amd64
+          sudo mv tofu-linux-amd64 /usr/local/bin/tofu
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
