@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'envi/**'
+      - 'envi/dev/s3**'
 
 jobs:
   terragrunt:
@@ -45,7 +45,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt Init & Apply (Dev)
-        working-directory: infrastructure/live/dev/s3
+        working-directory: envi/dev/s3
         run: |
           terragrunt init
           terragrunt plan -out=tfplan
