@@ -1,6 +1,6 @@
 name: Terraform s3
 
-on:
+on: 
   push:
     branches:
       - main
