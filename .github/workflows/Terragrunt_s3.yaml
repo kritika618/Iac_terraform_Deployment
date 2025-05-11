@@ -46,9 +46,14 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Terragrunt Init & Apply (Dev)
+      - name: Terragrunt Init & Plan (Dev)
         working-directory: envi/dev/s3
         run: |
           terragrunt init
-          terragrunt plan -out=tfplan
-          terragrunt apply -auto-approve tfplan
+          terragrunt validate-inputs
+          terragrunt plan
+
+      - name: Terragrunt Apply (Dev)
+        working-directory: envi/dev/s3
+        run: terragrunt apply -auto-approve
+
