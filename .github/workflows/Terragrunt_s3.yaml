@@ -18,10 +18,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Terraform (required for Terragrunt)
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: '1.6.6'
+      - name: Set TERRAGRUNT_TFPATH to tofu
+        run: echo "TERRAGRUNT_TFPATH=$(which tofu)" >> $GITHUB_ENV
 
       - name: Debug:Print environment and $PATH
         run: |
