@@ -38,11 +38,13 @@ jobs:
           sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
           terragrunt --version
 
-      - name: Install Tofu (if required)
+      - name: Install OpenTofu
         run: |
-          wget https://github.com/tofu/tofu/releases/download/v0.1/tofu-linux-amd64
-          chmod +x tofu-linux-amd64
-          sudo mv tofu-linux-amd64 /usr/local/bin/tofu
+          wget https://github.com/opentofu/opentofu/releases/download/v1.6.0/tofu_1.6.0_linux_amd64.tar.gz
+          tar -xvf tofu_1.6.0_linux_amd64.tar.gz
+          sudo mv tofu /usr/local/bin/
+          tofu version
+
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
