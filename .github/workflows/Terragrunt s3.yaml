@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'envi/dev/s3**'
+      - 'envi/**'
 
 jobs:
   terragrunt:
