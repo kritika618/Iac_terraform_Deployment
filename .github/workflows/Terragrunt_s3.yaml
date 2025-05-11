@@ -3,7 +3,7 @@ name: Terragrunt s3
 on:
   push:  
     branches:
-      - main
+      - main  
     paths:
       - 'envi/**'
 jobs:
