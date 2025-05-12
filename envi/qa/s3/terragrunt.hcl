@@ -5,8 +5,8 @@ terraform {
 inputs = {
   bucket                    = "my-s3-bucket-qa"
   acl                       = "private"
-  control_object_ownership = true
-  object_ownership         = "ObjectWriter"
+  control_object_ownership  = true
+  object_ownership          = "ObjectWriter"
 
   versioning = {
     enabled = true
