@@ -17,7 +17,7 @@ inputs = {
       essential = true
       network_mode             = "awsvpc"
       requires_compatibilities = ["FARGATE"]
-      portMappings = [
+      portMappings = [ 
         {
           containerPort = 80
           hostPort      = 80
