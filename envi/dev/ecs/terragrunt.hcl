@@ -3,8 +3,8 @@ terraform {
 }
 
 inputs = {
-  cluster_name          = "dev-ecs-cluster"
-  task_family           = "dev-ecs-task"
+  cluster_name          = "dev-cluster"
+  task_family           = "dev-task"
   cpu                   = "256"
   memory                = "512"
   execution_role_arn    = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
