@@ -1,4 +1,4 @@
-name: Terragrunt s3
+name: Terragrunt s3 dev
 
 on:
   push:
