@@ -26,9 +26,9 @@ inputs = {
       ]
     }
   ])
-  service_name     = "my-service"
-  desired_count    = 1
-  subnets          = ["subnet-0a433e5614138a125", "subnet-0cc71f61342a9a205"]
+  service_name    = "my-service"
+  desired_count   = 1
+  subnets         = ["subnet-0a433e5614138a125", "subnet-0cc71f61342a9a205"]
   security_groups  = ["sg-0a425b63089c65cd2"]
 }
 
