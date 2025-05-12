@@ -9,6 +9,7 @@ inputs = {
   task_family           = "dev-ecs-task"
   cpu                   = "256"
   memory                = "512"
+  project_name          = "my-app"
   execution_role_arn    = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
   container_definitions = jsonencode([
     {
