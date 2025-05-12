@@ -3,7 +3,7 @@ terraform {
 }
 
 inputs = {
-  cluster_name          = "dev-cluster"
+  ecs_cluster_name      = "dev-ecs-cluster"
   task_family           = "dev-task"
   cpu                   = "256"
   memory                = "512"
