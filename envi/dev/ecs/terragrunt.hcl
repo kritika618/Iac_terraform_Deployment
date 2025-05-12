@@ -1,11 +1,12 @@
 terraform {
-  source = "git::https://github.com/kritika618/terraform_new_modules.git//.modules/aws/ecs"
+  source = "git::https://github.com/kritika618/terraform_new_modules.git//ecs?ref=main"
 }
- 
+
 inputs = {
+  cluster_name          = "kritika-ecs-dev"
   environment           = "dev"
   ecs_cluster_name      = "dev-ecs-cluster"
-  cluster_name          = "dev-ecs-cluster"
+  
   task_family           = "dev-ecs-task"
   cpu                   = "256"
   memory                = "512"
