@@ -3,11 +3,11 @@ terraform {
 }
 
 inputs = {
-  ecs_cluster_name      = "dev-ecs-cluster"
-  task_family           = "dev-task"
-  cpu                   = "256"
-  memory                = "512"
-  execution_role_arn    = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
+  ecs_cluster_name     = "dev-ecs-cluster"
+  task_family          = "dev-task"
+  cpu                  = "256"
+  memory               = "512"
+  execution_role_arn   = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
   container_definitions = jsonencode([
     {
       name      = "web"
