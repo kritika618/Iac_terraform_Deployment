@@ -1,5 +1,5 @@
 terraform {
-  source = "git::https://github.com/kritika618/terraform_new_modules.git//ecs?ref=main"
+  source = "git::https://github.com/kritika618/terraform_new_modules.git//modules/ecs?ref=main"
 }
 
 inputs = {
