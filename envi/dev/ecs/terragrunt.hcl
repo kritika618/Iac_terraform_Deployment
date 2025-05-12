@@ -1,7 +1,7 @@
 terraform {
   source = "git::https://github.com/kritika618/terraform_new_modules.git//.modules/aws/ecs"
 }
-
+ 
 inputs = {
   environment           = "dev"
   ecs_cluster_name      = "dev-ecs-cluster"
