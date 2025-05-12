@@ -3,7 +3,8 @@ terraform {
 }
 
 inputs = {
-  cluster_name         = "dev-ecs-cluster"  # This must be a valid ECS name
+  ecs_cluster_name     = "dev-my-terragrunt-cluster"  # This should match your ECS cluster's name
+  cluster_name         = "dev-my-terragrunt-cluster"
   task_family          = "dev-ecs-task"
   cpu                  = "256"
   memory               = "512"
@@ -29,6 +30,6 @@ inputs = {
   desired_count  =  1
   subnets        =  ["subnet-0a433e5614138a125", "subnet-0cc71f61342a9a205"]
   security_groups = ["sg-0a425b63089c65cd2"]
-  environment     = "dev"
 }
+
 
