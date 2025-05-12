@@ -15,7 +15,7 @@ inputs = {
   container_definitions = jsonencode([
     {
       name      = "web"
-      image     = "nginx"
+      image     = "273354669111.dkr.ecr.ap-south-1.amazonaws.com/sample_app"
       cpu       = 128
       memory    = 256
       essential = true
