@@ -1,7 +1,7 @@
-name: Terragrunt ecs dev
+name: Terragrunt ECS Deployment - Dev
 
 on:
-   push:
+  push:
     branches:
       - main
     paths:
