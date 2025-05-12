@@ -3,12 +3,13 @@ terraform {
 }
 
 inputs = {
-  ecs_cluster_name     = "dev-my-terragrunt-cluster"  # This should match your ECS cluster's name
-  cluster_name         = "dev-my-terragrunt-cluster"
-  task_family          = "dev-ecs-task"
-  cpu                  = "256"
-  memory               = "512"
-  execution_role_arn   = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
+  environment           = "dev"
+  ecs_cluster_name      = "dev-ecs-cluster"
+  cluster_name          = "dev-ecs-cluster"
+  task_family           = "dev-ecs-task"
+  cpu                   = "256"
+  memory                = "512"
+  execution_role_arn    = "arn:aws:iam::273354669111:role/ecsTaskExecutionRole"
   container_definitions = jsonencode([
     {
       name      = "web"
@@ -16,8 +17,6 @@ inputs = {
       cpu       = 128
       memory    = 256
       essential = true
-      network_mode             = "awsvpc"
-      requires_compatibilities = ["FARGATE"]
       portMappings = [
         {
           containerPort = 80
@@ -26,10 +25,9 @@ inputs = {
       ]
     }
   ])
-  service_name   = "my-service"
-  desired_count  =  1
-  subnets        =  ["subnet-0a433e5614138a125", "subnet-0cc71f61342a9a205"]
-  security_groups = ["sg-0a425b63089c65cd2"]
+  service_name     = "my-service"
+  desired_count    = 1
+  subnets          = ["subnet-0a433e5614138a125", "subnet-0cc71f61342a9a205"]
+  security_groups  = ["sg-0a425b63089c65cd2"]
 }
-
 
