@@ -1,11 +1,12 @@
 name: Terragrunt s3
 
 on:
-  push:  
+  push:
     branches:
-      - main  
+      - main
     paths:
       - 'envi/**'
+
 jobs:
   terragrunt:
     name: Terragrunt Plan & Apply
@@ -18,38 +19,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set TERRAGRUNT_TFPATH to tofu
-        run: echo "TERRAGRUNT_TFPATH=$(which tofu)" >> $GITHUB_ENV
-
-      - name: Debug:Print environment and $PATH
-        run: |
-          echo "Environment:"
-          printenv
-          echo "PATH:"
-          echo $PATH
-
       - name: Install Terragrunt
         run: |
           TG_VERSION="v0.56.0"
-          wget https://github.com/opentofu/opentofu/releases/download/v1.6.0/opentofu_1.6.0_linux_amd64.tar.gz
-          tar -xvf opentofu_1.6.0_linux_amd64.tar.gz
-          sudo mv opentofu /usr/local/bin/tofu
-          tofu version
-
-
-      - name: Install OpenTofu
-        run: |
-          wget https://github.com/opentofu/opentofu/releases/download/v1.6.0/tofu_1.6.0_linux_amd64.tar.gz
-          tar -xvf tofu_1.6.0_linux_amd64.tar.gz
-          sudo mv tofu /usr/local/bin/
-          tofu version
+          wget https://github.com/gruntwork-io/terragrunt/releases/download/${TG_VERSION}/terragrunt_linux_amd64
+          chmod +x terragrunt_linux_amd64
+          sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+          terragrunt --version
 
       - name: Set up OpenTofu
         uses: opentofu/setup-opentofu@v1
         with:
           tofu_version: '1.6.0'
 
-
+      - name: Set TERRAGRUNT_TFPATH to tofu
+        run: echo "TERRAGRUNT_TFPATH=$(which tofu)" >> $GITHUB_ENV
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
