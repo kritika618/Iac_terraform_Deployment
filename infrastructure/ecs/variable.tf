@@ -2,11 +2,6 @@ variable "aws_region" {
   default = "ap-south-1"
 }
 
-variable "cluster_name" {
-
-
-}
-
 variable "project_name" {
   default = "sample-app"
 }
