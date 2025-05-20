@@ -3,7 +3,7 @@ terraform {
 }
 
 inputs = {
-  bucket_name = "my-s3-bucket-dev"
+  bucket_name = "my-s3-bucket-dev-1"
   acl         = "private"
   tags = {
     Environment = "dev"
