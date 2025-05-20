@@ -3,7 +3,7 @@ terraform {
 }
 
 inputs = {
-  bucket                    = "my-s3-bucket-qa"
+  bucket                    = "my-s3-bucket-qa-1"
   acl                       = "private"
   control_object_ownership  = true
   object_ownership          = "ObjectWriter"
